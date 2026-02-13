@@ -1,8 +1,8 @@
-##importing ts
+## importing ts
 import numpy as np
 import random
 
-## List of words
+## list of words
 astro_words = [
     "Space", "Earth", "Lunar", "Solar",
     "Orbit", "Light", "Night", "Comet", 
@@ -14,3 +14,9 @@ astro_words = [
     "Helix", "Deneb", "Nadir", "Apsis",
 
     ]
+
+## variables
+word = random.choice(astro_words).upper()
+word_letters = list(word)
+guesses_left = 6
+print(word, word_letters) ##remove this l8r
