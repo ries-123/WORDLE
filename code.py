@@ -16,12 +16,13 @@ astro_words = [
     "Helix", "Deneb", "Nadir", "Apsis",
 
     ]
+#print("\033[92mHello \033[91mWorld\033[0m")#figuring out colors
 
 ## variables
 word = random.choice(astro_words).upper()
 word_letters = list(word)
 guesses_left = 6
-appended_guess = []
+appended_guess = [] #list of guesses so far, will be printed after each guess
 n = 0 #this is the thing that will count up to test each letter (see below)
 
 ##print(word, word_letters) ##remove this l8r(test)
@@ -49,11 +50,11 @@ while guesses_left > 0: #later add a nested thing where api gives hint if guesse
     for n in range(5): #tests each letter in the guess, n is the thing that counts up to test each letter
         
         if guess_letters[n] == word_letters[n]: #if the two first letters are the same
-            print(f"in {guess}, {guess_letters[n]} is correct and in the right position")
+            print(f"in {guess}, \x1b[102m{guess_letters[n]}\x1b[0m is correct and in the right position")
         elif guess_letters[n] in word_letters:
-            print(f"in {guess}, {guess_letters[n]} is correct but in the wrong position")
+            print(f"in {guess}, \x1b[103m{guess_letters[n]}\x1b[0m is correct but in the wrong position")
         else:
-            print(f"in {guess}, {guess_letters[n]} is not in the word")
+            print(f"in {guess}, \x1b[100m{guess_letters[n]}\x1b[0m is not in the word")
         n += 1 #adds 1 to n so it can test the next letter in the next loop
             
     n = 0 #resets n to 1 so it can test the next guess
