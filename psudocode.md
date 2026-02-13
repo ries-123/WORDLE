@@ -1,0 +1,1 @@
+this is the psudocode for our astro wordle game
