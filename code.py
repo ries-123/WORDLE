@@ -27,7 +27,7 @@ guesses_left = 6
 
 ##loops until user imputs the right type of stuff
 print("AstWordle: Astronomy meets Wordle. you have 6 tries to guess a 5 letter word")
-while guesses_left > 0:
+while guesses_left > 0: #later add a nested thing where api gives hint if guesses_left == 3
     while True:
         guess = input("Enter a 5-letter word: ").upper()
         if len(guess) != 5:
@@ -37,6 +37,10 @@ while guesses_left > 0:
             print("Please enter only letters.")
             continue
         break
-print(f"you guessed: {guess}")
-user_letters = list(guess)
-print(user_letters)
+    guesses_left -= 1
+    print(f"you guessed: {guess}")
+    user_letters = list(guess)
+    #print(user_letters)
+    if guesses_left == 0:
+        print(f"*extremely loud incorrect buzzer* nah bru it was {word}")
+        break
