@@ -21,7 +21,7 @@ astro_words = [
 word = random.choice(astro_words).upper()
 word_letters = list(word)
 guesses_left = 6
-
+appended_guess = []
 
 ##print(word, word_letters) ##remove this l8r(test)
 
@@ -37,10 +37,10 @@ while guesses_left > 0: #later add a nested thing where api gives hint if guesse
             print("Please enter only letters.")
             continue
         break
-    guesses_left -= 1
-    print(f"you guessed: {guess}")
-    user_letters = list(guess)
-    #print(user_letters)
+    guesses_left -= 1 #subtracts 1 from # of guesses left
+    appended_guess.append(guess) #makes list of guesses so far
+    print(f"so far you have guessed: {appended_guess}, you have {guesses_left} guesses left") 
+    guess_letters = list(guess)
     if guesses_left == 0:
         print(f"*extremely loud incorrect buzzer* nah bru it was {word}")
         break
