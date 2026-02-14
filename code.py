@@ -84,6 +84,15 @@ while play=="yes":
             guess_on_four += 1
             print(f"congratulations you did it!! the word was {word}. you guessed it on guess #{guesses_so_far + 1}")
             break
+        if guess == word and guesses_so_far == 4:
+            guess_on_five += 1
+            print(f"congratulations you did it!! the word was {word}. you guessed it on guess #{guesses_so_far + 1}")
+            break
+        if guess == word and guesses_so_far == 5:
+            guess_on_six += 1
+            print(f"congratulations you did it!! the word was {word}. you guessed it on guess #{guesses_so_far + 1}")
+            break
+        
         
     
         # appended_guess.append(guess) #makes list of guesses so far
