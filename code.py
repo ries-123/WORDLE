@@ -15,10 +15,8 @@ astro_words = [
     "Titan", "Bulge", "Libra", "Virgo",
     "Epoch", "Thebe", "Ceres", "Umbra", 
     "Helix", "Deneb", "Nadir", "Apsis",
-
     ]
-word = random.choice(astro_words).upper()
-word_letters = list(word)
+## word selection moved after difficulty
 guesses_left = 6
 guesses_so_far = 0 # guesses # so far, will be printed after each guess
 appended_guess = [] #list of guesses, will be printed after each guess
@@ -35,20 +33,28 @@ guess_on_four = 0
 guess_on_five = 0
 guess_on_six = 0 
 loss_counter = 0
-play = True
+play = "yes"
 
+print("AstWordle: Astronomy meets Wordle. ")
 #game loop
-while play=="y":
-    print("AstWordle: Astronomy meets Wordle. you have 6 tries to guess a 5 letter word")
-    difficulty = input("choose your difficulty: easy, hard or ULTRAkill!!!: ").lower()
-    if difficulty == "easy":
-        astro_words = astro_words[0:9]
-    elif difficulty == "hard":
-        astro_words = astro_words[10:19]
-    elif difficulty == "ultrakill":
-        astro_words = astro_words[20:29]
-    #print("\033[92mHello \033[91mWorld\033[0m")#figuring out colors
-
+while play=="yes":
+    while True:  
+        difficulty = input("choose your difficulty: easy, hard or ULTRAkill!!!: ").lower()
+        if difficulty == "easy":
+            astro_words_difficulty = astro_words[0:9]
+            break
+        elif difficulty == "hard":
+            astro_words_difficulty = astro_words[10:19]
+            break
+        elif difficulty == "ultrakill":
+            astro_words_difficulty = astro_words[20:29]
+            break
+        else:
+            print("Please enter easy, hard, or ultrakill.")
+    # Now select the word from the correct difficulty
+    word = random.choice(astro_words_difficulty).upper()
+    word_letters = list(word)
+    print("you have 6 tries. after 3, you will be offered a hint.")
     ##loops until user imputs the right type of stuff
 
     while guesses_left > 0: #later add a nested thing where api gives hint if guesses_left == 3
@@ -117,14 +123,21 @@ while play=="y":
     guess_graph_y = [{guess_on_one}, {guess_on_two}, {guess_on_three}, {guess_on_four}, {guess_on_five}, {guess_on_six}] 
     #^y axis, shows how often the user wins with each # of guesses
     print({guess_on_one}, {guess_on_two}, {guess_on_three}, {guess_on_four}, {guess_on_five}, {guess_on_six})
+    fig, ax= plt.subplots() #makes the graph
     plt.bar(guess_graph_x, guess_graph_y) #makes the graph
-    plt.xlabel("Guess Number") #x axis label    
-    plt.ylabel("Number of Wins") #y axis label
-    plt.title("AstWordle Guess Distribution") #title of graph
-
+    ax.set_xlabel('Guess Number') #x axis label    
+    ax.set_ylabel('Number of Wins') #y axis label
+    #plt.title("AstWordle Guess Distribution") #title of graph
+    plt.show() #shows the graph
 
     #asking user to play again
-    play=input("play again? y/n: ").lower()
+    while True:
+        play=input("play again? yes/no: ").lower()
+        if not play == "yes" or play == "no":
+            print("Please enter yes or no.")
+            continue
+        break
+
 
     
 
