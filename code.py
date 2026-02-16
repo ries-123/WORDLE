@@ -131,11 +131,10 @@ while play=="yes":
     print({guess_on_one}, {guess_on_two}, {guess_on_three}, {guess_on_four}, {guess_on_five}, {guess_on_six})
     guess_graph_x = ['1', '2', '3', '4', '5', '6'] #x axis for graph, will be used to show how many guesses it took to win
     guess_graph_y = [guess_on_one, guess_on_two, guess_on_three, guess_on_four, guess_on_five, guess_on_six] 
-    fig, ax= plt.subplots() #makes the graph
-    plt.bar(guess_graph_x, guess_graph_y) #makes the graph
-    ax.set_xlabel('Guess Number') #x axis label    
-    ax.set_ylabel('Number of Wins') #y axis label
-    #plt.title("AstWordle Guess Distribution") #title of graph
+    plt.bar(guess_graph_x, guess_graph_y, color='light_green') #makes the graph
+    plt.xlabel('Guess Number') #x axis label    
+    plt.ylabel('Number of Wins') #y axis label
+    plt.title("AstWordle Guess Distribution") #title of graph
     plt.show() #shows the graph
 
     #asking user to play again
