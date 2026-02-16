@@ -92,7 +92,7 @@ while play=="yes":
             guess_on_six += 1
             print(f"congratulations you did it!! the word was {word}. you guessed it on guess #{guesses_so_far + 1}")
             break
-        
+
         
     
         # appended_guess.append(guess) #makes list of guesses so far
@@ -128,10 +128,9 @@ while play=="yes":
             print(f"\x1b[31m*extremely loud incorrect buzzer*\x1b[0m] nah bru it was {word}")
             loss_counter += 1
             break
-    guess_graph_x = [1, 2, 3, 4, 5, 6] #x axis for graph, will be used to show how many guesses it took to win
-    guess_graph_y = [{guess_on_one}, {guess_on_two}, {guess_on_three}, {guess_on_four}, {guess_on_five}, {guess_on_six}] 
-    #^y axis, shows how often the user wins with each # of guesses
     print({guess_on_one}, {guess_on_two}, {guess_on_three}, {guess_on_four}, {guess_on_five}, {guess_on_six})
+    guess_graph_x = ['1', '2', '3', '4', '5', '6'] #x axis for graph, will be used to show how many guesses it took to win
+    guess_graph_y = [guess_on_one, guess_on_two, guess_on_three, guess_on_four, guess_on_five, guess_on_six] 
     fig, ax= plt.subplots() #makes the graph
     plt.bar(guess_graph_x, guess_graph_y) #makes the graph
     ax.set_xlabel('Guess Number') #x axis label    
