@@ -22,6 +22,7 @@ guesses_so_far = 0 # guesses # so far, will be printed after each guess
 appended_guess = [] #list of guesses, will be printed after each guess
 n = 0 #this is the thing that will count up to test each letter (see below)
 appended_letters = [] #list of letters guessed so far
+guessed_letter_colors = {} # maps letter to its most recent color code
 colored_letters = [] #list of letters with colors, will be printed after each guess
 ##print(word, word_letters) ##remove this l8r(test)
 
@@ -68,27 +69,29 @@ while play=="yes":
                 continue
             break
 
+
+#win conditions, helps keep track of wins per guess stats
         if guess == word and guesses_so_far == 0:
             guess_on_one += 1
             print(f"congratulations you did it!! the word was {word}. you guessed it on guess #{guesses_so_far + 1}")
             break
-        if guess == word and guesses_so_far == 1:
+        elif guess == word and guesses_so_far == 1:
             guess_on_two += 1
             print(f"congratulations you did it!! the word was {word}. you guessed it on guess #{guesses_so_far + 1}")
             break
-        if guess == word and guesses_so_far == 2:
+        elif guess == word and guesses_so_far == 2:
             guess_on_three += 1
             print(f"congratulations you did it!! the word was {word}. you guessed it on guess #{guesses_so_far + 1}")
             break
-        if guess == word and guesses_so_far == 3:
+        elif guess == word and guesses_so_far == 3:
             guess_on_four += 1
             print(f"congratulations you did it!! the word was {word}. you guessed it on guess #{guesses_so_far + 1}")
             break
-        if guess == word and guesses_so_far == 4:
+        elif guess == word and guesses_so_far == 4:
             guess_on_five += 1
             print(f"congratulations you did it!! the word was {word}. you guessed it on guess #{guesses_so_far + 1}")
             break
-        if guess == word and guesses_so_far == 5:
+        elif guess == word and guesses_so_far == 5:
             guess_on_six += 1
             print(f"congratulations you did it!! the word was {word}. you guessed it on guess #{guesses_so_far + 1}")
             break
@@ -99,35 +102,51 @@ while play=="yes":
         
         guess_letters = list(guess) #turns guess into letters, separates them into diff strings to test
         
-        for n in range(5): #tests each letter in the guess, n is the thing that counts up to test each letter
-            
-            if guess_letters[n] == word_letters[n]: #if the two first letters are the same
-            # colored_letters[n] = f"\x1b[102m{guess_letters[n]}\x1b[0m" #turns the letter bg green
-                print(f"in {guess}, \x1b[102m{guess_letters[n]}\x1b[0m is correct and in the right position")
-            elif guess_letters[n] in word_letters:
-            #  colored_letters[n] = f"\x1b[103m{guess_letters[n]}\x1b[0m" #turns the letter bg yellow
-                print(f"in {guess}, \x1b[103m{guess_letters[n]}\x1b[0m is correct but in the wrong position")
+
+        for n in range(5):
+            letter = guess_letters[n]
+            # Determine color code for this letter in this guess
+            if guess_letters[n] == word_letters[n]:
+                color = '\x1b[102m'  # green
+                colored_letters.append(f"\x1b[102m{letter}\x1b[0m")
+                print(f"in {guess}, \x1b[102m{letter}\x1b[0m is correct and in the right position")
+            elif letter in word_letters:
+                color = '\x1b[103m'  # yellow
+                colored_letters.append(f"\x1b[103m{letter}\x1b[0m")
+                print(f"in {guess}, \x1b[103m{letter}\x1b[0m is correct but in the wrong position")
+            elif letter not in word_letters:
+                color = '\x1b[100m'  # gray
+                colored_letters.append(f"\x1b[100m{letter}\x1b[0m")
+                print(f"in {guess}, \x1b[100m{letter}\x1b[0m is not in the word")
             else:
-            #   colored_letters[n] = f"\x1b[100m{guess_letters[n]}\x1b[0m" #turns the letter bg gray
-                print(f"in {guess}, \x1b[100m{guess_letters[n]}\x1b[0m is not in the word")
-            #if guess_letters[n] not in appended_letters:    
-            #  appended_letters.append(colored_letters[n])
-                
-            n += 1 #adds 1 to n so it can test the next letter in the next loop
-            
-        n = 0 #resets n to 1 so it can test the next guess
-        print(f"letters tested so far: {appended_letters}") #prints the letters tested so far, will be reset after each guess 
-        guesses_left -= 1 #subtracts 1 from # of guesses left
-        guesses_so_far += 1 #adds 1 to the number of guesses so far
-        #number of times user wins on nth guess vvv
-        
-        print(f"you have {guesses_left} guesses left") #prints the number of guesses left after each guess
-        
-    
+                color = ''
+            # Always update the color for the letter to the most recent
+            guessed_letter_colors[letter] = color
+            if letter not in appended_letters:
+                appended_letters.append(letter)
+
+        # Print colored guess for this round
+        ("".join(colored_letters))
+        n = 0
+
+        guesses_left -= 1
+        guesses_so_far += 1
+
+
+        # Print all unique letters guessed so far (sorted, with color)
+        print("letters guessed so far:")
+        sorted_letters = sorted(appended_letters)
+        colored_guessed = [f"{guessed_letter_colors[l]}{l}\x1b[0m" for l in sorted_letters]
+        print(" ".join(colored_guessed))
+        print(f"you have {guesses_left} guesses left")
+
         if guesses_left <= 0:
             print(f"\x1b[31m*extremely loud incorrect buzzer*\x1b[0m] nah bru it was {word}")
             loss_counter += 1
             break
+
+        
+    
     print({guess_on_one}, {guess_on_two}, {guess_on_three}, {guess_on_four}, {guess_on_five}, {guess_on_six})
     guess_graph_x = ['1', '2', '3', '4', '5', '6'] #x axis for graph, will be used to show how many guesses it took to win
     guess_graph_y = [guess_on_one, guess_on_two, guess_on_three, guess_on_four, guess_on_five, guess_on_six] 
