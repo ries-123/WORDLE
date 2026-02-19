@@ -59,6 +59,36 @@ while play=="yes":
     ##loops until user imputs the right type of stuff
 
     while guesses_left > 0: #later add a nested thing where api gives hint if guesses_left == 3
+        #-------this fat chunk of text will be the llm hint thing-------------
+        # We will use this to suppress some warnings that are not important
+        import warnings
+        # Suppress specific Pydantic warnings that clutter the output
+        warnings.filterwarnings("ignore", category=UserWarning, module="pydantic")
+        # We will use dotenv to read the .env file
+        from dotenv import load_dotenv
+        load_dotenv()
+        import litellm
+        import os
+        from sklearn.cluster import KMeans
+        custom_api_base = "https://litellmproxy.osu-ai.org/"
+        astro1221_key = os.getenv("ASTRO1221_API_KEY")
+        warnings.filterwarnings("ignore", category=UserWarning, module="pydantic")
+        #Removing unnecessary warnings."
+
+        if guesses_left == 3:
+            hint = input("do you want a hint? yes/no: ").lower()
+            if hint == "yes":
+                    response = litellm.completion(
+                        model="openai/GPT-4.1-mini",
+                        messages=[
+                            {"role": "user", "content": f"The word is {word}. Give me a hint that will help me guess the word in less than 100 characters."}
+                        ],
+                        max_tokens=100,
+                        api_base=custom_api_base,
+                        api_key=astro1221_key,
+                    )
+                    print(response.choices[0].message.content)
+
         while True:
             guess = input("Enter a 5-letter word: ").upper()
             if len(guess) != 5:
@@ -166,6 +196,3 @@ while play=="yes":
 
 
     
-
-
-
