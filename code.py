@@ -186,6 +186,14 @@ while play=="yes":
     plt.title("AstWordle Guess Distribution") #title of graph
     plt.show() #shows the graph
 
+    #resetting variables for next game
+    guesses_left = 6
+    guesses_so_far = 0 
+    appended_guess = [] 
+    appended_letters = [] 
+    guessed_letter_colors = {} 
+    colored_letters = [] 
+
     #asking user to play again
     while True:
         play=input("play again? yes/no: ").lower()
