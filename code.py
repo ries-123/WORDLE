@@ -1,3 +1,5 @@
+print('this code is outdated, please use the jupyter file instead (.ipynb)')
+
 ##saving progress: git add ____, git commit -m "message", git push origin main
 
 ## importing ts
@@ -177,7 +179,7 @@ while play=="yes":
 
         
     
-    print({guess_on_one}, {guess_on_two}, {guess_on_three}, {guess_on_four}, {guess_on_five}, {guess_on_six})
+    #print({guess_on_one}, {guess_on_two}, {guess_on_three}, {guess_on_four}, {guess_on_five}, {guess_on_six})
     guess_graph_x = ['1', '2', '3', '4', '5', '6'] #x axis for graph, will be used to show how many guesses it took to win
     guess_graph_y = [guess_on_one, guess_on_two, guess_on_three, guess_on_four, guess_on_five, guess_on_six] 
     plt.bar(guess_graph_x, guess_graph_y, color='green') #makes the graph
@@ -194,12 +196,15 @@ while play=="yes":
     guessed_letter_colors = {} 
     colored_letters = [] 
 
-    #asking user to play again
+     #asking user to play again
     while True:
         play=input("play again? yes/no: ").lower()
-        if not play == "yes" or play == "no":
-            print("Please enter yes or no.")
-            continue
-        break
+        
+        if play == "yes":
+            break
+        if play == "no":
+            quit()
+            break
+        else:
+            break
 
-    
