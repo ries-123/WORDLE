@@ -1,2 +1,2 @@
 # WORDLE
-AAAHH
+our astwordle project :)
